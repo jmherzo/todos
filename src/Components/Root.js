@@ -6,7 +6,7 @@ import { Route, BrowserRouter } from "react-router-dom";
 const Root = ({ store }) => (
   <Provider store={store}>
     <BrowserRouter>
-      <Route path="/:filter?" component={App} />
+      <Route path="/:filter?" children={() => <App />} />
     </BrowserRouter>
   </Provider>
 );
