@@ -1,7 +1,6 @@
 # Simple Todo list app
 
-Based on the courses:
-[Getting started with Redux](https://egghead.io/courses/getting-started-with-redux)
+Based on the course:
 [Building React Applications with Idiomatic Redux](https://egghead.io/courses/building-react-applications-with-idiomatic-redux)
 by Dan Abramov
 
