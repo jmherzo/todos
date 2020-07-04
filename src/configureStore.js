@@ -8,13 +8,23 @@ const addLoggingToDispatch = store => {
   }
   return action => {
     console.group(action.type);
-    console.log("prev state", store.getState());
-    console.log("action", action);
+    console.log('%c prev state', 'color: gray', store.getState());
+    console.log('%c action', 'color: blue', action);
     const returnValue = rawDispatch(action);
-    console.log("next state", store.getState());
+    console.log('%c next state', 'color: green', store.getState());
     console.groupEnd(action.type);
     return returnValue;
   };
+};
+
+const addPromiseSupportToDispatch = store => {
+  const rawDispatch = store.dispatch;
+  return (action) => {
+    if (typeof action.then === 'function') {
+      return action.then(rawDispatch);
+    }
+    rawDispatch(action);
+  }
 };
 
 const configureStore = () => {
@@ -22,6 +32,7 @@ const configureStore = () => {
   if (process.env.NODE_ENV !== "production") {
     store.dispatch = addLoggingToDispatch(store);
   }
+  store.dispatch = addPromiseSupportToDispatch(store);
   return store;
 };
 
