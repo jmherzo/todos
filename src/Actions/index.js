@@ -1,6 +1,7 @@
-import { v4 } from "node-uuid";
 import * as api from '../Api';
-import { getIsFetching } from "../Reducers";
+import {
+  getIsFetching
+} from "../Reducers";
 
 export const fetchTodos = (filter) => (dispatch, getState) => {
   if (getIsFetching(getState(), filter)) {
@@ -33,8 +34,11 @@ export const toggleTodo = id => ({
   id
 });
 
-export const addTodo = text => ({
-  type: "ADD_TODO",
-  text,
-  id: v4()
-});
+export const addTodo = text => dispatch => (
+  api.addTodo(text).then(response => {
+    dispatch({
+      type: 'ADD_TODO_SUCCESS',
+      response
+    });
+  })
+);
